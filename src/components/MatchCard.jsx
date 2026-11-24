@@ -6,8 +6,10 @@ function MatchCard({
     venue,
     price,
     availableSeats,
-    onBook
+    onBook,
+    bookingInProgress
 }) {
+
     return (
         <div className="match-card">
 
@@ -20,15 +22,24 @@ function MatchCard({
             <p>Ticket Price: ₹{price}</p>
 
             <p className="seats">
-                Available Tickets: {availableSeats}
+                Available Seats: {availableSeats}
             </p>
 
             <button
                 type="button"
                 onClick={onBook}
-                disabled={availableSeats === 0}
+                disabled={
+                    availableSeats === 0 ||
+                    bookingInProgress
+                }
             >
-                {availableSeats > 0 ? "Book Ticket" : "Sold Out"}
+
+                {availableSeats === 0
+                    ? "Sold Out"
+                    : bookingInProgress
+                    ? "Please Wait..."
+                    : "Book Ticket"}
+
             </button>
 
         </div>
